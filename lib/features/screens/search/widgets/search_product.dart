@@ -1,8 +1,10 @@
 import 'package:amazon_new/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/stars.dart';
+import '../../../../providers/user_provider.dart';
 
 class SearchedProduct extends StatelessWidget {
   final Product product;
@@ -10,6 +12,14 @@ class SearchedProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double totalRatings = 0;
+    double avgRating = 0;
+    for (int i = 0; i < product.ratings!.length; i++) {
+      totalRatings += product.ratings![i].ratings.toDouble();
+    }
+    if (totalRatings != 0) {
+      avgRating = totalRatings / product.ratings!.length;
+    }
     return Column(
       children: [
         Container(
@@ -36,8 +46,8 @@ class SearchedProduct extends StatelessWidget {
                   Container(
                       width: 235,
                       padding: const EdgeInsets.only(left: 10, top: 5),
-                      child: const Stars(
-                        ratings: 4,
+                      child: Stars(
+                        ratings: avgRating,
                       )),
                   Container(
                     width: 235,
