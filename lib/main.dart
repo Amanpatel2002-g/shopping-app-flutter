@@ -1,4 +1,5 @@
 import 'package:amazon_new/constants/bottomNavigation_bar.dart';
+import 'package:amazon_new/constants/loader.dart';
 import 'package:amazon_new/features/admin/screen/admin_screen.dart';
 import 'package:amazon_new/providers/user_provider.dart';
 import 'package:amazon_new/routes/routes.dart';
@@ -25,29 +26,37 @@ class Myapp extends StatefulWidget {
 
 class _MyappState extends State<Myapp> {
   final AuthServices authServices = AuthServices();
+  Widget? startingWidget;
   @override
   void initState() {
     super.initState();
-    authServices.getUserData(context);
+    initalize();
+  }
+
+  void initalize() async {
+    await authServices.getUserData(context);
+    Provider.of<UserProvider>(context, listen: false).user.token.isNotEmpty
+        ? Provider.of<UserProvider>(context, listen: false).user.type == 'user'
+            ? startingWidget = const BottomBar()
+            : startingWidget = const AdminScreen()
+        : startingWidget = const AuthScreen();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-          colorScheme: const ColorScheme.light(
-              primary: Color.fromARGB(255, 234, 172, 73)),
-          appBarTheme: const AppBarTheme(
-              elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
-      onGenerateRoute: ((settings) => generateRoute(settings)),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? Provider.of<UserProvider>(context).user.type == 'user'
-              ? const BottomBar()
-              : const AdminScreen()
-          : const AuthScreen(),
-      // home: const AdminScreen(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+            colorScheme: const ColorScheme.light(
+                primary: Color.fromARGB(255, 234, 172, 73)),
+            appBarTheme: const AppBarTheme(
+                elevation: 0, iconTheme: IconThemeData(color: Colors.black))),
+        onGenerateRoute: ((settings) => generateRoute(settings)),
+        // ignore: prefer_if_null_operators
+        home: startingWidget == null ? const Loader() : startingWidget
+        // home: const AdminScreen(),
+        );
   }
 }

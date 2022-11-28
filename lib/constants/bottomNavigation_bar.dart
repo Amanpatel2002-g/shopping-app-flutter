@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:amazon_new/features/screens/cart/screens/cart_screen.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +24,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text("This is shopping cart page"),
-    ),
+    const CartScreen(),
   ];
 
   void updatePages(int page) {
