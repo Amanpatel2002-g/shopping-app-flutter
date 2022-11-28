@@ -20,7 +20,7 @@ class _DealOfDayState extends State<DealOfDay> {
     setState(() {});
   }
 
-  void NavigateToProductScreen(BuildContext context) {
+  void navigateToProductScreen(BuildContext context) {
     Navigator.pushNamed(context, ProductDetailsScreen.routeName,
         arguments: product);
   }
@@ -35,7 +35,7 @@ class _DealOfDayState extends State<DealOfDay> {
     return product == null
         ? const Loader()
         : GestureDetector(
-            onTap: () => NavigateToProductScreen(context),
+            onTap: () => navigateToProductScreen(context),
             child: Container(
               child: Column(
                 children: [

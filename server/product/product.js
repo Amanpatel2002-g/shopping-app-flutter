@@ -1,7 +1,7 @@
 const express = require('express');
 const productRouter = express.Router();
 const authMiddleware = require('../middlewares/auth_middlewares');
-const Product = require('../models/product_model');
+const {Product} = require('../models/product_model');
 productRouter.get("/auth/products/", authMiddleware, async (req, res) => {
     try {
         console.log(req.query.category);
@@ -70,8 +70,8 @@ productRouter.get("/auth/products/deal-of-the-day", authMiddleware, async (req, 
         return res.json(products[0]);
         
     } catch (e) {
-        console.log({ error: err.message });
-        res.status(500).json({ error: err.message });
+        console.log({ error: e.message });
+        res.status(500).json({ error: e.message });
     }
 });
 

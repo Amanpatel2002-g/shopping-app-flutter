@@ -14,14 +14,20 @@ void httpErrorHandling(
       onSuccess();
       break;
     case 400:
-      
-      showSnackbar(context, jsonDecode(response.body)["msg"]);
+      print("This is from http ErrorHandling case:400 \n");
+      print("The message is\n");
+      print(jsonDecode(response.body)["msg"]);
+
+      showSnackbar(context, jsonDecode(response.body)["message"]);
       break;
     case 500:
       // print(jsonDecode(response.body));
+      print("This is from http ErrorHandling case:500\n");
+
       showSnackbar(context, jsonDecode(response.body)["err"]);
       break;
     default:
+      print("This is from http ErrorHandling case:default\n");
       print(response.body);
       showSnackbar(context, response.body);
   }

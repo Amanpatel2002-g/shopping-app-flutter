@@ -33,6 +33,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: querry);
   }
 
+  // void addToCart(){
+
+  // }
+
   @override
   void initState() {
     super.initState();

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:amazon_new/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:amazon_new/constants/error_handling.dart';
 import 'package:amazon_new/constants/utils.dart';
@@ -34,6 +35,36 @@ class ProductDetailsServices {
           onSuccess: () {
             showSnackbar(context, 'Product Added Successfully');
             Navigator.pop(context);
+          });
+      print(res.body);
+    } catch (e) {
+      showSnackbar(context, e.toString());
+      print(e.toString());
+    }
+  }
+
+  void addToCart({
+    required BuildContext context,
+    required Product product,
+  }) async {
+    final userprovider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      http.Response res =
+          await http.post(Uri.parse('$uri/auth/products/rate-product'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'token': userprovider.user.token
+              },
+              body: jsonEncode({
+                'id': product.id!,
+              }));
+      httpErrorHandling(
+          context: context,
+          response: res,
+          onSuccess: () {
+            UserModel user =
+                userprovider.user.copyWith(cart: jsonDecode(res.body)['cart']);
+            userprovider.setUserFromModel(user);
           });
       print(res.body);
     } catch (e) {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
@@ -13,11 +12,17 @@ class UserProvider extends ChangeNotifier {
       password: '',
       address: '',
       type: '',
-      token: '');
+      token: '',
+      cart: []);
   UserModel get user => _user;
 
   void setUser(String user) {
     _user = UserModel.fromJson(user);
+    notifyListeners();
+  }
+
+  void setUserFromModel(UserModel user) {
+    _user = user;
     notifyListeners();
   }
 }

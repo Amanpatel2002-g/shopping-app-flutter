@@ -3,6 +3,7 @@ const { default: mongoose } = require('mongoose');
 const adminRouter = require('./auth/admin');
 const authRouter = require('./auth/auth');
 const productRouter = require('./product/product');
+const userRouter = require('./user/userRouter');
 const app = Express();
 const PORT = 3000;
 const DB = "mongodb+srv://aman:amanpatel@cluster0.ocitnmk.mongodb.net/?retryWrites=true&w=majority";
@@ -12,6 +13,7 @@ app.use(Express.json());
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
+app.use(userRouter);
 
 mongoose.connect(DB).then(() => {
     console.log("Database Connected");
