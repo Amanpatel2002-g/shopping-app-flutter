@@ -50,7 +50,7 @@ class ProductDetailsServices {
     final userprovider = Provider.of<UserProvider>(context, listen: false);
     try {
       http.Response res =
-          await http.post(Uri.parse('$uri/auth/products/rate-product'),
+          await http.post(Uri.parse('$uri/auth/add-to-cart'),
               headers: <String, String>{
                 'Content-Type': 'application/json; charset=UTF-8',
                 'token': userprovider.user.token

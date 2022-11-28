@@ -44,8 +44,8 @@ productRouter.post("/auth/products/rate-product", authMiddleware, async (req, re
         res.json(product);
 
     } catch (err) {
-        console.log({ error: err.message });
-        res.status(500).json({ error: err.message });
+        console.log({ err: err.message });
+        res.status(500).json({ err: err.message });
     }
 
 });
