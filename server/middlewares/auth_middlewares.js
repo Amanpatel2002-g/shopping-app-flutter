@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user_model');
 const AuthMiddleware = async (req, res, next) => {
     try {
+        console.log(req.header('token'));
         const token = req.header('token');
         if (!token) {
             return res.json({ msg: "No auth token, Access Denied!" });
@@ -17,7 +18,7 @@ const AuthMiddleware = async (req, res, next) => {
         console.log("Auth middleware is working\n");
         next();
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ err: error.message });
     }
 }
 

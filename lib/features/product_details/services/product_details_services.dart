@@ -49,6 +49,7 @@ class ProductDetailsServices {
   }) async {
     final userprovider = Provider.of<UserProvider>(context, listen: false);
     try {
+      print(userprovider.user.token);
       http.Response res =
           await http.post(Uri.parse('$uri/auth/add-to-cart'),
               headers: <String, String>{

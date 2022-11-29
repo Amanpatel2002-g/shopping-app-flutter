@@ -1,7 +1,9 @@
 import 'package:amazon_new/features/screens/cart/widgets/cart_SubTotal.dart';
+import 'package:amazon_new/features/screens/cart/widgets/cart_product.dart';
 import 'package:amazon_new/features/screens/home/widgets/address_box.dart';
 import 'package:amazon_new/widgets/auth_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/global_variables.dart';
@@ -92,7 +94,31 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             const AddressBox(),
             const CartSubTotal(),
-            CustomButton(text: '${user.cart.length}', ontap: (){}),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomButton(
+                text: '${user.cart.length} items',
+                ontap: () {},
+                color: Colors.yellow[600],
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              color: Colors.black12.withOpacity(0.08),
+              height: 1,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            ListView.builder(
+              itemCount: user.cart.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CartProduct(index: index);
+              },
+            )
           ],
         ),
       ),
