@@ -1,4 +1,6 @@
-# amazon_new
+# Shopping App Flutter:
+
+made By aman Patel github repo: [https://github.com/Amanpatel2002-g/shopping-app-flutter](https://github.com/Amanpatel2002-g/shopping-app-flutter)
 
 A new Flutter project.
 
